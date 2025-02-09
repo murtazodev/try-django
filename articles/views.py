@@ -17,7 +17,7 @@ def article_create_view(request):
             return redirect('article-detail', id=article.id)
     else:
         form = ArticleForm()
-    return render(request, 'article/article_log.html', {'form': form})
+    return render(request, 'articles/article_create.html', {'form': form})
 
 
 

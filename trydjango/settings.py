@@ -12,15 +12,21 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+print(BASE_DIR)  # Debugging
 
-
+load_dotenv()
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY", "xl*=pi@@h+c8eru%j+wuy9uqrj*fl7#0l&pj-xe_z(o48h5(a!")
+SECRET_KEY = os.environ.get("SECRET_KEY")
+print(os.getenv("SECRET_KEY"))  # Debugging
+
+if not SECRET_KEY:
+    raise ValueError("No SECRET_KEY is not in .evn file")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = str(os.environ.get('DEBUG')) == '1'
