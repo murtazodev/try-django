@@ -34,7 +34,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-.idea
+.idea/
 env/
 venv/
 build/
@@ -88,4 +88,5 @@ __pycache__/
 local_settings.py
 
 .env
-db.sqlite3
+db.sqlite3.idea/
+.DS_Store 
