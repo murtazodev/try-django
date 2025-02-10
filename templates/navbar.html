@@ -1,0 +1,30 @@
+<nav class="navbar" style="display: flex; justify-content: center; padding: 20px 80px;">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 1100px;">
+        
+        <!-- Left Side: Logo & Navigation Links -->
+        <div class="nav-left" style="display: flex; align-items: center; gap: 50px;">
+            <a href="/">Trydjango</a>
+            <div class="nav-links" style="display: flex; gap: 15px;">
+
+                <a href="/admin">Admin Panel</a>
+                <a href="/">Home</a>
+                <a href="/home">Admin Home</a>
+
+                <a href="{% url 'home' %}">Article List</a>
+                <a href="{% url 'article-create' %}">Article Create</a>
+                
+                <a href="{% url 'login-view' %}">Login</a>
+                <a href="{% url 'logout-view' %}">Logout</a>
+                <a href="{% url 'register-view' %}">Register</a>
+
+            </div>
+        </div>
+
+        <!-- Right Side: Actions -->
+        <!-- <div class="nav-actions" style="display: flex; align-items: center; gap: 35px;">
+            <a href="#">Ask Question</a>
+            <button>Sign In</button>
+        </div> -->
+
+    </div>
+</nav>
