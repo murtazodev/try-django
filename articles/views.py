@@ -20,14 +20,20 @@ def article_create_view(request):
     return render(request, 'articles/article_create.html', {'form': form})
 
 
-
 def article_detail_view(request, id):
     article = Article.objects.get(id=id)
     return render(request, 'articles/article_detail.html', {'article': article})
 
-def demo(request):
-    articles = Article.objects.all()
 
+def article_update_view(request, id):
+    article = Article.objects.get(id=id)
+    form = ArticleForm(instance=article)
+    if request.method == 'POST':
+        form = ArticleForm(request.POST, instance=article)
+        if form.is_valid():
+            article = form.save()
+            return redirect('article-detail', id=article.id)
+    return render(request, 'articles/article_update.html', {'form': form, 'article': article})
 
 
 # def article_create_viewold1(request):
