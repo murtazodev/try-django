@@ -1,7 +1,29 @@
 from .models import Article
 from .forms import ArticleForm
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+
+def article_search_view(request):
+    # query = request.GET.get('q')
+    # qs = Article.objects.search(query=query)
+    # context ={
+    #     'object_list': qs,
+    # }
+    # return render(request, 'articles/article_search.html', context=context)
+
+    query = request.GET.get('q', '')
+    
+    if query:
+        qs = Article.objects.filter(title__icontains=query)
+    else:
+        qs = Article.objects.none()  # Return an empty queryset if no query
+
+    context = {
+        'object_list': qs,
+        'query': query,
+    }
+    return render(request, 'articles/article_search.html', context=context)
+
 
 def home_view(request):
     articles = Article.objects.all()
@@ -21,8 +43,13 @@ def article_create_view(request):
 
 
 def article_detail_view(request, slug):
-    article = Article.objects.get(slug=slug)
-    return render(request, 'articles/article_detail.html', {'article': article})
+    # Use get_object_or_404 to safely retrieve an article or return a 404 error
+    article = get_object_or_404(Article, slug=slug)
+
+    context = {
+        'article': article
+    }
+    return render(request, 'articles/article_detail.html', context)
 
 
 def article_update_view(request, slug):
