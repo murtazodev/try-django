@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Article Search</h2>
+<!-- <form method="GET">
+    <input type="text" name="q" placeholder="Search..">
+    <button type="submit">Search</button>
+</form> -->
+<div style="margin-top: 30px;">
+    <h3>Search Results</h3>
+    {% if object_list %}
+        <ul>
+            {% for article in object_list %}
+                <li>
+                    <h1>{{ article.title }}</h1>
+                    <p>{{ article.content }}</p>
+                    <a href="{{ article.get_absolute_url }}">Read more</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No articles found for your search.</p>
+    {% endif %}
+</div>
+{% endblock content %}
