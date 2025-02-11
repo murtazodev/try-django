@@ -14,7 +14,7 @@ def article_create_view(request):
         form = ArticleForm(request.POST)
         if form.is_valid():
             article = form.save()
-            return redirect('article-detail', id=article.id)
+            return redirect('article-detail', slug=article.slug)
     else:
         form = ArticleForm()
     return render(request, 'articles/article_create.html', {'form': form})
@@ -25,14 +25,14 @@ def article_detail_view(request, slug):
     return render(request, 'articles/article_detail.html', {'article': article})
 
 
-def article_update_view(request, id):
-    article = Article.objects.get(id=id)
+def article_update_view(request, slug):
+    article = Article.objects.get(slug=slug)
     form = ArticleForm(instance=article)
     if request.method == 'POST':
         form = ArticleForm(request.POST, instance=article)
         if form.is_valid():
             article = form.save()
-            return redirect('article-detail', id=article.id)
+            return redirect('article-detail', slug=article.slug)
     return render(request, 'articles/article_update.html', {'form': form, 'article': article})
 
 

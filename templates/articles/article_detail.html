@@ -9,5 +9,6 @@
   <p>updated: {{article.updated_at}}</p>
 
   <a class="btn btn-secondary" href="{% url 'home' %}">Back to Articles</a>
+  <a class="btn btn-primary" href="{% url 'article-update' article.slug %}">Update</a>
   
 {% endblock %}
