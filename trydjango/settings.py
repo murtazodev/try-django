@@ -23,7 +23,6 @@ load_dotenv()
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("SECRET_KEY")
-print(os.getenv("SECRET_KEY"))  # Debugging
 
 if not SECRET_KEY:
     raise ValueError("No SECRET_KEY is not in .evn file")
