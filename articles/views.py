@@ -14,7 +14,7 @@ def article_create_view(request):
         form = ArticleForm(request.POST)
         if form.is_valid():
             article = form.save()
-            return redirect('article-detail', slug=article.slug)
+            return redirect(article.get_absolute_url())
     else:
         form = ArticleForm()
     return render(request, 'articles/article_create.html', {'form': form})

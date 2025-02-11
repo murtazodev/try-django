@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.timezone import localtime
 from django.utils.text import slugify
 from django.db.models.signals import pre_save, post_save
+from django.urls import reverse
 
 class Article(models.Model):
     title = models.CharField(max_length=120)
@@ -31,6 +32,9 @@ class Article(models.Model):
                 counter += 1
 
         super().save(*args, **kwargs)
+    
+    def get_absolute_url(self):
+        return reverse('article-detail', kwargs={'slug': self.slug})
 
 def article_pre_save(sender, instance, *args, **kwargs):
     # print("Article Pre Save")
