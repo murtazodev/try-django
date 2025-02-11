@@ -8,7 +8,7 @@
 <div style="margin-top: 30px;">
     <h3>Search Results</h3>
     {% if object_list %}
-        <ul>
+        <ol>
             {% for article in object_list %}
                 <li>
                     <h1>{{ article.title }}</h1>
@@ -16,7 +16,7 @@
                     <a href="{{ article.get_absolute_url }}">Read more</a>
                 </li>
             {% endfor %}
-        </ul>
+        </ol>
     {% else %}
         <p>No articles found for your search.</p>
     {% endif %}

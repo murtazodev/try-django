@@ -2,6 +2,7 @@ from .models import Article
 from .forms import ArticleForm
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 def article_search_view(request):
     # query = request.GET.get('q')
@@ -14,7 +15,8 @@ def article_search_view(request):
     query = request.GET.get('q', '')
     
     if query:
-        qs = Article.objects.filter(title__icontains=query)
+        lookups = Q(title__icontains=query)
+        qs = Article.objects.filter(lookups)
     else:
         qs = Article.objects.none()  # Return an empty queryset if no query
 
