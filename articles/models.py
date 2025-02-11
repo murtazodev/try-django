@@ -19,19 +19,21 @@ class Article(models.Model):
     def __str__(self):
         return f"{self.id} - {self.title}"
     
-    def save(self, *args, **kwargs):  
-        if not self.slug:  
-            self.slug = slugify(self.title)
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            base_slug = slugify(self.title)
+            self.slug = base_slug
 
-        original_slug = self.slug
-        count = Article.objects.filter(slug=self.slug).count()
-        if count > 0:
-            self.slug = f"{original_slug}-{self.id}"  # Add ID or a counter to make it unique
-        
+            # Ensure uniqueness
+            counter = 1
+            while Article.objects.filter(slug=self.slug).exists():
+                self.slug = f"{base_slug}-{counter}"
+                counter += 1
+
         super().save(*args, **kwargs)
 
 def article_pre_save(sender, instance, *args, **kwargs):
-    print("Article Pre Save")
+    # print("Article Pre Save")
     if instance.slug is None:  
         slug = slugify(instance.title)
         instance.slug = slug
@@ -39,7 +41,7 @@ def article_pre_save(sender, instance, *args, **kwargs):
 pre_save.connect(article_pre_save, sender=Article)
 
 def article_post_save(sender, instance, created, *args, **kwargs):
-    print("Article Post Save")
+    # print("Article Post Save")
     if created:
         instance.slug = f"{instance.slug}-{instance.id}"
         instance.save()
