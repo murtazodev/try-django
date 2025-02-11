@@ -20,8 +20,8 @@ def article_create_view(request):
     return render(request, 'articles/article_create.html', {'form': form})
 
 
-def article_detail_view(request, id):
-    article = Article.objects.get(id=id)
+def article_detail_view(request, slug):
+    article = Article.objects.get(slug=slug)
     return render(request, 'articles/article_detail.html', {'article': article})
 
 

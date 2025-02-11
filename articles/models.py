@@ -5,7 +5,7 @@ from django.db.models.signals import pre_save, post_save
 
 class Article(models.Model):
     title = models.CharField(max_length=120)
-    slug = models.SlugField(blank=True, null=True)
+    slug = models.SlugField(blank=True, null=True, unique=True)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
@@ -20,14 +20,21 @@ class Article(models.Model):
         return f"{self.id} - {self.title}"
     
     def save(self, *args, **kwargs):  
-        if self.slug is None:  
+        if not self.slug:  
             self.slug = slugify(self.title)
+
+        original_slug = self.slug
+        count = Article.objects.filter(slug=self.slug).count()
+        if count > 0:
+            self.slug = f"{original_slug}-{self.id}"  # Add ID or a counter to make it unique
+        
         super().save(*args, **kwargs)
 
 def article_pre_save(sender, instance, *args, **kwargs):
     print("Article Pre Save")
-    # if instance.slug is None:  
-    instance.slug = slugify(instance.title)
+    if instance.slug is None:  
+        slug = slugify(instance.title)
+        instance.slug = slug
     
 pre_save.connect(article_pre_save, sender=Article)
 
