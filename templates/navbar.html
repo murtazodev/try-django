@@ -13,10 +13,10 @@
                 <a href="{% url 'article-create' %}">Article Create</a>
 
                 {% if user.is_authenticated %}
-                    <a href="{% url 'login-view' %}">Login</a>
-                    <a href="{% url 'logout-view' %}">Logout</a>
-                    <a href="{% url 'article-search' %}">Seach</a>
+                <a href="{% url 'logout-view' %}">Logout</a>
+                <a href="{% url 'article-search' %}">Seach</a>
                 {% else %}
+                    <a href="{% url 'login-view' %}">Login</a>
                     <a href="{% url 'register-view' %}">Register</a>
                 {% endif %}
 
