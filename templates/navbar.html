@@ -11,7 +11,7 @@
 
                 <a href="{% url 'home' %}">Article List</a>
                 <a href="{% url 'article-create' %}">Article Create</a>
-                
+
                 {% if user.is_authenticated %}
                     <a href="{% url 'login-view' %}">Login</a>
                     <a href="{% url 'logout-view' %}">Logout</a>
