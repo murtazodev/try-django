@@ -1,26 +1,30 @@
 {% extends 'base.html' %}
 {% block content %}
-  <h2>Home</h2>
-    <div style="margin-top: 30px;">
-        <p>Welcome to the home page</p>
-    </div>
-    
-    <div style="margin-top: 30px;">
-        <h2>Article Search</h2>
-        <form action="{% url 'article-search' %}" method="GET">
-            <input type="text" name="q" placeholder="Search..">
-            <button type="submit">Search</button>
-        </form>
-    </div>
+{% if not request.user.is_authenticated %}  
+    <h2>Home [you are not logged in]</h2>
+{% else %}
+    <h2>Home</h2>
+        <div style="margin-top: 30px;">
+            <p>Welcome to the home page</p>
+        </div>
+        
+        <div style="margin-top: 30px;">
+            <h2>Article Search</h2>
+            <form action="{% url 'article-search' %}" method="GET">
+                <input type="text" name="q" placeholder="Search..">
+                <button type="submit">Search</button>
+            </form>
+        </div>
 
-    <div style="margin-top: 30px;">
-        <h3>Articles</h3>
-        <ul>
-            {% for article in articles %}
-                <li>
-                    <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
+        <div style="margin-top: 30px;">
+            <h3>Articles</h3>
+            <ul>
+                {% for article in articles %}
+                    <li>
+                        <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %} 
 {% endblock %}
