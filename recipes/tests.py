@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from .models import*
-
+from django.core.exceptions import ValidationError
 
 User = get_user_model()
 
@@ -28,5 +28,30 @@ class RecipeTestCase(TestCase):
         qs = Recipe.objects.filter(user=user)
         print(qs.first().name)  
         self.assertEqual(qs.count(), self.user_a.recipe_set.count())
+
+    def test_unit_of_measurement(self):
+        ingredient = RecipeIngredient(
+            recipe = self.recipe_b,
+            name='new ingredient',
+            quantity='5',
+            unit='lbs',
+        )
+
+        ingredient.full_clean()
+
+    def test_unit_of_measurement_error(self):
+        invalid_unit = 'nada'
+        with self.assertRaises(ValidationError):
+            ingredient = RecipeIngredient(
+                recipe = self.recipe_b,
+                name='new ingredient',
+                quantity='5',
+                unit=invalid_unit,
+            )
+
+            ingredient.full_clean()
+
+
+
 
 
