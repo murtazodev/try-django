@@ -9,6 +9,7 @@ class RecipeIngredientInline(admin.StackedInline):
     readonly_fields = ['quantity_float']
 
 class RecipeAdmin(admin.ModelAdmin):
+    inlines = [RecipeIngredientInline]
     list_display = ['name', 'user']
     readonly_fields = ['created_at', 'updated_at']
     raw_id_fields = ['user']
