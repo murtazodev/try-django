@@ -9,7 +9,7 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('home')
+            return redirect('default')
     else:
         form = AuthenticationForm()
     return render(request, 'accounts/login.html', {'form': form})
@@ -23,7 +23,7 @@ def login_view_old(request):
             context = {"error": "Invalid username or password"}
             return render(request, 'accounts/login.html', context)
         login(request, user)
-        return redirect('home')
+        return redirect('default')
         # validate(username, password)
     return render(request, 'accounts/login.html', {})
 

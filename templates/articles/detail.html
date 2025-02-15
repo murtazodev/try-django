@@ -8,7 +8,7 @@
   <p>created: {{article.created_at_kst}}</p>
   <p>updated: {{article.updated_at}}</p>
 
-  <a class="btn btn-primary" href="{% url 'article-update' article.slug %}">Update</a>
-  <a class="btn btn-secondary" href="{% url 'home' %}">Back to Articles</a>
+  <a class="btn btn-primary" href="{% url 'articles:update' article.slug %}">Update</a>
+  <a class="btn btn-secondary" href="{% url 'articles:home' %}">Back to Articles</a>
   
 {% endblock %}

@@ -34,7 +34,7 @@ class Article(models.Model):
         super().save(*args, **kwargs)
     
     def get_absolute_url(self):
-        return reverse('article-detail', kwargs={'slug': self.slug})
+        return reverse('articles:detail', kwargs={'slug': self.slug})
 
 def article_pre_save(sender, instance, *args, **kwargs):
     # print("Article Pre Save")

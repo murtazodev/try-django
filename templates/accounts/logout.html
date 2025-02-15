@@ -7,7 +7,7 @@
             {% csrf_token %}
             <p>Are you sure to log out?</p>
             <button type="submit">Yes, logout</button>
-            <a href="../">Cancel</a>
+            <a href="{% url 'articles:home' %}">Cancel</a>
         </form>
     </div>
 {% else %}

@@ -20,9 +20,10 @@ from .views import home_view
 
 
 urlpatterns = [
-    path('home/', home_view),
+    path('', home_view, name='default'),
     path('admin/', admin.site.urls),
     # path('', include('blog.urls')),
-    path('', include('articles.urls')),
+    path('articles/', include('articles.urls')),
     path('', include('accounts.urls')),
+    path('', include('recipes.urls')),
 ]

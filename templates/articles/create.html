@@ -7,7 +7,7 @@
         {% csrf_token %}
         {{form.as_p}}
         <button type="submit">Create</button>
-        <a href="{% url 'home' %}">Back</a>
+        <a href="{% url 'articles:home' %}">Back</a>
     </form>
     <!-- <div style="margin-top: 30px;">
         <form method="POST"> {% csrf_token %}    

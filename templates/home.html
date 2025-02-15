@@ -10,7 +10,7 @@
         
         <div style="margin-top: 30px;">
             <h2>Article Search</h2>
-            <form action="{% url 'article-search' %}" method="GET">
+            <form action="{% url 'articles:search' %}" method="GET">
                 <input type="text" name="q" placeholder="Search..">
                 <button type="submit">Search</button>
             </form>
@@ -21,7 +21,7 @@
             <ul>
                 {% for article in articles %}
                     <li>
-                        <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+                        <a href="{% url 'articles:detail' article.slug %}">{{ article.title }}</a>
                     </li>
                 {% endfor %}
             </ul>

@@ -24,7 +24,7 @@ def article_search_view(request):
         'object_list': qs,
         'query': query,
     }
-    return render(request, 'articles/article_search.html', context=context)
+    return render(request, 'articles/search.html', context=context)
 
 
 def home_view(request):
@@ -41,7 +41,7 @@ def article_create_view(request):
             return redirect(article.get_absolute_url())
     else:
         form = ArticleForm()
-    return render(request, 'articles/article_create.html', {'form': form})
+    return render(request, 'articles/create.html', {'form': form})
 
 
 def article_detail_view(request, slug):
@@ -51,7 +51,7 @@ def article_detail_view(request, slug):
     context = {
         'article': article
     }
-    return render(request, 'articles/article_detail.html', context)
+    return render(request, 'articles/detail.html', context)
 
 
 def article_update_view(request, slug):
@@ -62,7 +62,7 @@ def article_update_view(request, slug):
         if form.is_valid():
             article = form.save()
             return redirect('article-detail', slug=article.slug)
-    return render(request, 'articles/article_update.html', {'form': form, 'article': article})
+    return render(request, 'articles/update.html', {'form': form, 'article': article})
 
 
 # def article_create_viewold1(request):
