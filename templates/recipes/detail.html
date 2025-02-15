@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    
+    <div class="card">
+        <div class="card-body">
+            <h2 class="mb-3">{{ object.name }}</h2>
+            <p class="card-text">{{ object.name|default:"No name available" }}</p>
+            
+
+            <h5 class="card-title">Description</h5>
+            <p class="card-text">{{ object.description|default:"No description available" }}</p>
+            
+            <h5 class="card-title mt-4">Directions</h5>
+            <p class="card-text">{{ object.directions|default:"No directions available" }}</p>
+            
+            <h5 class="card-title mt-4">Ingredients</h5>
+            
+            {% for ingredient in object.recipeingredient_set.all %}
+                <li> {{ ingredient.name }} {{ ingredient.description }} {{ ingredient.directions }} </li>
+                <!-- <li> {{ ingredient.as_imperial }} </li>
+                <li> {{ ingredient.as_mks }} </li> -->
+            {% endfor %}
+            
+            <p class="text-muted mt-4">Created at: {{ object.created_at|date:"Y-m-d H:i" }}</p>
+            <p class="text-muted">Last updated: {{ object.updated_at|date:"Y-m-d H:i" }}</p>
+        </div>
+    </div>
+    
+    <div class="mt-4">
+        <a href="{% url 'recipes:update' object.id %}" class="btn btn-primary">Edit recipe</a>
+        <a href="{% url 'recipes:delete' object.id %}" class="btn btn-danger">Delete recipe</a>
+        <a href="{% url 'recipes:list' %}" class="btn btn-secondary">Back to Recipe List</a>
+    </div>
+</div>
+{% endblock %}

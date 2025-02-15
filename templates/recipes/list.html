@@ -2,7 +2,10 @@
 
 {% block content %}
 <div class="container mt-4">
-    <h2 class="mb-3">My Recipes</h2>
+    <div class="d-flex justify-content-between align-items-center">
+        <h2 class="mb-3">My Recipes</h2> 
+        <a href="{url 'recipes:create'}" class="btn btn-primary mb-3">Create Recipe</a>
+    </div>
     
     {% if recipes %}
         <div class="table-responsive">
@@ -20,13 +23,14 @@
                     {% for recipe in recipes %}
                     <tr>
                         <td>{{ forloop.counter }}</td>
-                        <td>{{ recipe.name }}</td>
+                        <td><a href="{{ recipe.get_absolute_url }}">{{ recipe.name }}</a></td>
+
                         <td>{{ recipe.description|default:"No description" }}</td>
                         <td>{{ recipe.created_at|date:"Y-m-d H:i" }}</td>
                         <td>
-                            <a href="#" class="btn btn-sm btn-outline-secondary">View</a>
-                            <a href="#" class="btn btn-sm btn-outline-secondary">Edit</a>
-                            <a href="#" class="btn btn-sm btn-outline-danger">Delete</a>
+                            <a href="{{ recipe.get_absolute_url }}" class="btn btn-sm btn-outline-secondary">View</a>
+                            <a href="{% url 'recipes:update' recipe.id %}" class="btn btn-sm btn-outline-secondary">Edit</a>
+                            <a href="{% url 'recipes:delete' recipe.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
                         </td>
                     </tr>
                     {% endfor %}

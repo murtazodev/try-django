@@ -1,0 +1,24 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+    <h2>
+        {% if is_update %}
+            Update Recipe
+        {% else %}
+            Create Recipe
+        {% endif %}
+    </h2>
+  
+    <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">
+            {% if is_update %}
+                Update
+            {% else %}
+                Create
+            {% endif %}
+        </button>
+        <a href="{% url 'recipes:list' %}">Back</a>
+    </form>
+{% endblock %}

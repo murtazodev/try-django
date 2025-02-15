@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from .validators import validate_unit_of_measurement
 from .utils import number_str_to_float
+from django.urls import reverse
 
 
 class Recipe(models.Model):
@@ -12,6 +13,9 @@ class Recipe(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
+
+    def get_absolute_url(self):
+        return reverse('recipes:detail', kwargs={'id': self.id})
 
 class RecipeIngredient(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)

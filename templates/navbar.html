@@ -20,11 +20,12 @@
             </div>
         </div>
 
-        <!-- Right Side: Actions -->
-        <!-- <div class="nav-actions" style="display: flex; align-items: center; gap: 35px;">
-            <a href="#">Ask Question</a>
-            <button>Sign In</button>
-        </div> -->
-
+        <div style="margin-top: 30px;">
+            <h2>Article Search</h2>
+            <form action="{% url 'articles:search' %}" method="GET">
+                <input type="text" name="q" placeholder="Search..">
+                <button type="submit">Search</button>
+            </form>
+        </div>
     </div>
 </nav>
