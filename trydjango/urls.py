@@ -25,5 +25,5 @@ urlpatterns = [
     # path('', include('blog.urls')),
     path('articles/', include('articles.urls')),
     path('', include('accounts.urls')),
-    path('', include('recipes.urls')),
+    path('recipes/', include('recipes.urls')),
 ]
