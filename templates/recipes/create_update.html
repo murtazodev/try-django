@@ -12,6 +12,8 @@
     <form method="POST">
         {% csrf_token %}
         {{form.as_p}}
+
+        {{form_2.as_p}}
         <button type="submit">
             {% if is_update %}
                 Update
