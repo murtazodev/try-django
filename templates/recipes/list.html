@@ -4,7 +4,7 @@
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center">
         <h2 class="mb-3">My Recipes</h2> 
-        <a href="{url 'recipes:create'}" class="btn btn-primary mb-3">Create Recipe</a>
+        <a href="{% url 'recipes:create' %}" class="btn btn-primary mb-3">Create Recipe</a>
     </div>
     
     {% if recipes %}
